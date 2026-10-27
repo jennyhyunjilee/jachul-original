@@ -1,0 +1,8 @@
+# Vercel은 화면(index.html)과 노선도만 배포한다.
+# server.py가 있으면 Vercel이 파이썬 서버로 잘못 배포하니 파이썬·개발용 파일은 뺀다.
+*.py
+requirements.txt
+output/
+dist/
+data/crawl_cache.json
+.claude/
