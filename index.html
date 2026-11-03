@@ -244,7 +244,7 @@ body{overflow:hidden}
 .two > *{min-width:0}
 .side{display:flex;flex-direction:column;gap:12px}
 .side > button{width:100%;padding:12px}
-.set{width:100%;padding:14px;font-size:20px;background:var(--accent);color:var(--accentInk);flex:none;position:sticky;bottom:0;z-index:2}
+.set{width:100%;padding:14px;font-size:20px;background:var(--accent);color:var(--accentInk);flex:none}
 .set:disabled{background:var(--soft);color:var(--muted);cursor:not-allowed}
 
 /* 목표 입력 */
@@ -315,7 +315,7 @@ dialog[open]{animation:rise .25s steps(3,end)}
 .arow2 #copyExcuse{flex:1 1 100%;margin-top:6px}
 @media (prefers-reduced-motion: reduce){ .mic.rec,.m-late .moodline,.m-doomed .moodline,.slide.active .two > *,.slide.active > .set,dialog[open]{animation:none} }
 
-.toast{position:fixed;left:50%;top:max(14px, env(safe-area-inset-top, 0px));transform:translateX(-50%);z-index:20;width:min(420px,calc(100% - 32px));background:var(--card);color:var(--ink);padding:10px 14px;font-size:14px;border-style:solid;border-width:6px;border-image:var(--pxb) 2 / 6px / 0 stretch;background-clip:padding-box;filter:drop-shadow(4px 4px 0 var(--shadow))}
+.toast{position:fixed;left:50%;bottom:max(16px, env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:20;width:min(420px,calc(100% - 32px));background:var(--card);color:var(--ink);padding:10px 14px;font-size:14px;border-style:solid;border-width:6px;border-image:var(--pxb) 2 / 6px / 0 stretch;background-clip:padding-box;filter:drop-shadow(4px 4px 0 var(--shadow))}
 .toast b{display:block}
 #routesList button{justify-content:space-between}
 #routesList .del{flex:none;width:34px;height:34px;padding:0;font-size:14px}
