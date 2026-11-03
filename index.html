@@ -222,6 +222,22 @@ button:not([data-st]):active{transform:translate(3px,3px);filter:none}
 .trains li.mine{border-image:var(--pxb) 2 / 6px / 0 stretch}
 .ghost{border-image:var(--pxb) 2 / 6px / 0 stretch;opacity:.8}
 .lb{border-radius:0}
+
+/* 컴퓨터 화면: 왼쪽은 목표·대화, 오른쪽은 다이얼·경로·열차 */
+@media (min-width:900px){
+  main{max-width:1120px;padding-block:28px 64px;padding-left:max(32px, env(safe-area-inset-left, 0px));padding-right:max(32px, env(safe-area-inset-right, 0px))}
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+  .col{min-width:0}
+  h1{font-size:30px}
+  .goal-head{font-size:30px}
+  svg.dial{max-width:320px;display:block;margin-inline:auto}
+}
+@media (min-width:1280px){
+  main{max-width:1320px}
+  .cols{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) minmax(0,1fr)}
+  .col-see{grid-column:span 2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 28px;align-items:start}
+  .col-see > .dialwrap{grid-row:span 2}
+}
 </style>
 </head>
 <body>
@@ -236,6 +252,8 @@ button:not([data-st]):active{transform:translate(3px,3px);filter:none}
   </header>
   <div class="source" id="source"><i></i><span>연결 확인 중…</span></div>
 
+  <div class="cols">
+  <div class="col col-talk">
   <!-- 1. 목표: 모든 판단의 기준 -->
   <section class="goal" aria-label="오늘 목표">
     <div class="goal-label" id="goalLabel">오늘 목표</div>
@@ -271,7 +289,9 @@ button:not([data-st]):active{transform:translate(3px,3px);filter:none}
     <input id="askText" maxlength="200" placeholder="쟈철한테 아무거나 물어봐" aria-label="쟈철한테 물어보기">
     <button type="submit">보내기</button>
   </form>
+  </div>
 
+  <div class="col col-see">
   <!-- 3. 돌려보기 -->
   <section class="card dialwrap preview">
     <div class="dialhead"><h2>돌려봐</h2><button type="button" class="mini" id="moreLate" aria-pressed="false">더 늦을지도;</button></div>
@@ -303,6 +323,8 @@ button:not([data-st]):active{transform:translate(3px,3px);filter:none}
     <svg class="strip" id="strip" viewBox="0 0 340 204" role="img" aria-label="다가오는 열차 위치"></svg>
     <ul class="trains" id="trains"></ul>
   </section>
+  </div>
+  </div>
 </main>
 
 <!-- 역 고르기 -->
