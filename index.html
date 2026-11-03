@@ -257,18 +257,23 @@ body{overflow:hidden}
 .goal-err{margin:8px 0 0;font-size:13px;color:var(--late);min-height:0}
 .goal-err:empty{display:none}
 
-/* 말해서 입력: 듣는 동안 마이크가 깜빡, 말이 실시간으로 찍힘 */
-.voice h2{margin-bottom:4px}
-.nl{display:flex;gap:10px;align-items:stretch;margin-top:12px}
-.mic{flex:none;width:64px;font-size:26px;padding:0;background:var(--accent);color:var(--accentInk)}
-.mic.rec{background:var(--late);color:#fff;animation:blink .7s steps(1,end) infinite}
+/* 첫 화면: 목표 카드 하나만, 가운데 */
+.solo{width:100%;max-width:560px;margin:auto auto 0}
+#sGoal > .set{max-width:560px;margin:0 auto auto;align-self:center}
+.app.on-goal .livebar{display:none}
+/* 말해서 입력 (카드 안 한 줄): 듣는 동안 마이크가 깜빡, 말이 실시간으로 찍힘 */
+.nl{display:flex;gap:6px;align-items:stretch;margin-top:10px}
+.goal .mic{flex:none;width:52px;font-size:22px;padding:0;background:var(--accent);color:var(--accentInk)}
+.goal .mic.rec{background:var(--late);color:#fff;animation:blink .7s steps(1,end) infinite}
 @keyframes blink{50%{opacity:.35}}
-.nl textarea{flex:1;min-width:0;font:inherit;font-size:16px;padding:10px 12px;resize:none;background:var(--bg);color:var(--ink);border-style:solid;border-width:6px;border-image:var(--pxb) 2 / 6px / 0 stretch;background-clip:padding-box}
+.nl textarea{flex:1;min-width:0;font:inherit;font-size:15px;padding:8px 10px;resize:none;background:rgba(255,255,255,.06);color:var(--goalInk);border-style:solid;border-width:6px;border-image:var(--pxb-soft) 2 / 6px / 0 stretch;background-clip:padding-box;outline:none}
+.nl textarea::placeholder{color:var(--goalMuted)}
 .nl textarea.rec{caret-color:var(--late)}
-.nlhint{font-size:13px;margin:10px 0 10px;color:var(--muted);min-height:1.5em}
-.nlhint.ok{color:var(--ink);font-weight:700}
+.goal .nlgo{flex:none;padding:0 12px;background:transparent;color:var(--goalInk)}
+.nlhint{font-size:13px;margin:6px 0 0;color:var(--goalMuted)}
+.nlhint:empty{display:none}
+.nlhint.ok{color:var(--goalInk);font-weight:700}
 .nlhint .live{display:inline-block;width:8px;height:8px;background:var(--late);margin-right:6px;animation:blink .7s steps(1,end) infinite}
-#nlApply{width:100%}
 
 /* 원: 상태별로 카드 색이 바뀜 (늦으면 빨강, 왕창 늦으면 검정) */
 .dialwrap,.moodcard{color:var(--ink)}
@@ -276,7 +281,6 @@ body{overflow:hidden}
 .m-doomed{--card:#111111;--ink:#f3efe6;--muted:#a19c90;--soft:#3a3a3a}
 .m-late button,.m-doomed button{background:#ffffff;color:#111111}
 .m-late .center-res,.m-doomed .center-res{fill:#ffffff}
-.m-late .abubble b,.m-doomed .abubble b{color:var(--ink)}
 .moodline{font-size:22px;font-weight:700;letter-spacing:-.03em;text-align:center;margin:8px 0 0;min-height:1.3em}
 .m-late .moodline,.m-doomed .moodline{animation:blink 1s steps(1,end) infinite}
 .moodbody{margin:6px 0 4px;font-size:15px}
@@ -299,20 +303,17 @@ svg.dial{max-width:min(300px,100%)}
 dialog.alarm{width:min(460px,calc(100% - 24px));color:var(--ink)}
 dialog[open]{animation:rise .25s steps(3,end)}
 .alarm .aclock{font-size:13px;color:var(--muted)}
-.alarm .aface{width:150px;margin:2px auto 8px;animation:float 1.8s steps(1,end) infinite}
-.alarm .aface svg{display:block;width:100%;height:auto}
-.alarm .aface .lid{opacity:0;animation:lid 4.2s steps(1,end) infinite}
-.abubble{text-align:center}
-.abubble .q{font-size:13px;color:var(--muted);margin:0 0 4px}
-.abubble b{display:block;font-size:24px;letter-spacing:-.03em;line-height:1.25;margin-bottom:6px}
-.abubble span{font-size:15px}
+.alarm .arow{max-width:100%;margin-top:4px}
+.alarm .avatar .lid{animation:lid 4.2s steps(1,end) infinite}
+.alarm .msg.agent{font-size:15.5px}
+.alarm .msg.me{margin:6px 0 10px auto;width:fit-content;max-width:85%}
 .alarm .chips{justify-content:center;margin:14px 0 10px}
 .alarm .chips button{font-size:13px;padding:5px 10px}
 .alarm .askform{margin:0 0 6px}
 .arow2{display:flex;gap:8px;flex-wrap:wrap}
 .arow2 .save{flex:1;margin-top:6px}
 .arow2 #copyExcuse{flex:1 1 100%;margin-top:6px}
-@media (prefers-reduced-motion: reduce){ .alarm .aface,.mic.rec,.m-late .moodline,.m-doomed .moodline,.slide.active .two > *,.slide.active > .set,dialog[open]{animation:none} }
+@media (prefers-reduced-motion: reduce){ .mic.rec,.m-late .moodline,.m-doomed .moodline,.slide.active .two > *,.slide.active > .set,dialog[open]{animation:none} }
 
 .toast{position:fixed;left:50%;top:max(14px, env(safe-area-inset-top, 0px));transform:translateX(-50%);z-index:20;width:min(420px,calc(100% - 32px));background:var(--card);color:var(--ink);padding:10px 14px;font-size:14px;border-style:solid;border-width:6px;border-image:var(--pxb) 2 / 6px / 0 stretch;background-clip:padding-box;filter:drop-shadow(4px 4px 0 var(--shadow))}
 .toast b{display:block}
@@ -358,7 +359,7 @@ dialog[open]{animation:rise .25s steps(3,end)}
   <div class="deck" id="deck">
     <!-- 1. 목표: 모든 판단의 기준 -->
     <section class="slide" id="sGoal" aria-label="목표 정하기">
-      <div class="two">
+      <div class="solo">
         <section class="goal" aria-label="오늘 목표">
           <div class="goal-label" id="goalLabel">오늘 목표</div>
           <div class="goal-head" id="goalHead"></div>
@@ -368,25 +369,21 @@ dialog[open]{animation:rise .25s steps(3,end)}
             <button class="field" id="toBtn"><small>어디서 내려?</small><span class="v" id="toV"></span></button>
           </div>
           <div class="goal-row">
-            <label class="field"><small>몇 시까지? (930, 9:30, 오후 3시)</small><input id="arriveIn" type="text" inputmode="text" autocomplete="off" placeholder="09:00" maxlength="12"></label>
+            <label class="field"><small>몇 시까지?</small><input id="arriveIn" type="text" inputmode="text" autocomplete="off" placeholder="9:30" maxlength="12"></label>
             <div class="field"><small>준비 시간 (분)</small>
               <div class="stepper"><button type="button" id="prepMinus" aria-label="준비 시간 5분 줄이기">−</button><input id="prepIn" type="number" inputmode="numeric" min="0" max="180" aria-label="준비 시간 (분)"><button type="button" id="prepPlus" aria-label="준비 시간 5분 늘리기">+</button></div>
             </div>
           </div>
+          <div class="nl">
+            <button type="button" class="mic" id="micBtn" aria-label="말해서 입력" aria-pressed="false">🎤</button>
+            <textarea id="nlText" rows="1" maxlength="200" placeholder="🎤 말하거나 쳐: 강남 9시까지"></textarea>
+            <button type="button" class="nlgo" id="nlApply" aria-label="이대로 채우기">채워</button>
+          </div>
+          <p class="nlhint" id="nlHint" aria-live="polite"></p>
           <p class="goal-err" id="goalErr" role="alert"></p>
           <p class="goal-sum" id="goalSum"></p>
         </section>
 
-        <section class="card voice">
-          <h2>말로 정해도 돼</h2>
-          <p class="hint">마이크 누르고 "홍대입구에서 강남 9시까지, 준비 30분"처럼 말해. 쳐도 돼.</p>
-          <div class="nl">
-            <button type="button" class="mic" id="micBtn" aria-label="말해서 입력" aria-pressed="false">🎤</button>
-            <textarea id="nlText" rows="3" maxlength="200" placeholder="홍대입구에서 강남 9시까지 준비 30분"></textarea>
-          </div>
-          <p class="nlhint" id="nlHint" aria-live="polite"></p>
-          <button type="button" id="nlApply">이대로 채워</button>
-        </section>
       </div>
       <button class="set" id="setBtn">세팅 →</button>
     </section>
@@ -459,8 +456,8 @@ dialog[open]{animation:rise .25s steps(3,end)}
 <dialog id="alarm" class="alarm" aria-labelledby="alarmMsg">
   <div class="sheet">
     <div class="khead"><span class="mono aclock" id="alarmClock"></span><button type="button" class="kclose" id="alarmClose" aria-label="닫기">✕</button></div>
-    <div class="aface" id="alarmFace"></div>
-    <div class="abubble" id="alarmMsg"></div>
+    <div class="msg me" id="alarmQ" hidden></div>
+    <div class="arow"><div class="avatar" id="alarmFace"></div><div class="abody"><div class="aname">쟈철</div><div class="msg agent" id="alarmMsg"></div></div></div>
     <div class="chips needgoal" id="alarmChips">
       <button data-what="0">지금 나가면?</button>
       <button data-what="10">10분 뒤엔?</button>
@@ -928,18 +925,24 @@ function honest(){
   if(!ready()) return current();
   const md = moodOf(plan()), m = current();
   m.title = MOODS[md.k].alarm; m.mood = md.k;
+  m.level = {free:"", soon:"warn", prep:"warn", go:"urgent", late:"late", doomed:"late"}[md.k];
   if(md.k === "late" || md.k === "doomed") m.face = Math.max(m.face ?? 0, md.k === "doomed" ? 5 : 3);
   return m;
 }
 function renderAlarm(m, q){
-  const d = $("alarm"), k = m.mood || (ready() ? moodOf(plan()).k : "free");
-  d.classList.remove("m-free","m-soon","m-prep","m-go","m-late","m-doomed"); d.classList.add("m-" + k);
+  const k = m.mood || (ready() ? moodOf(plan()).k : "free");
   $("alarmClock").textContent = hhmm(now());
   $("alarmFace").innerHTML = faceSvg(m.typing ? 1 : (m.face ?? 1));
+  $("alarmQ").hidden = !q; if(q) $("alarmQ").textContent = q;
   const b = $("alarmMsg");
-  b.innerHTML = (q ? `<p class="q"></p>` : "") + (m.typing ? `<span class="typing"><i></i><i></i><i></i></span>` : `<b></b><span></span>`);
-  if(q) b.querySelector(".q").textContent = "나: " + q;
-  if(!m.typing){ b.querySelector("b").textContent = m.title; b.querySelector("span").textContent = m.body || ""; }
+  b.className = "msg agent " + (m.typing ? "" : (m.level || ""));
+  if(m.typing) b.innerHTML = `<span class="typing"><i></i><i></i><i></i></span>`;
+  else {
+    b.innerHTML = `<b></b><span></span><span class="time"></span>`;
+    b.querySelector("b").textContent = m.title;
+    b.querySelector("span").textContent = m.body || "";
+    b.querySelector(".time").textContent = hhmm(now());
+  }
   $("copyExcuse").hidden = !(ready() && (k === "late" || k === "doomed"));
 }
 function openAlarm(m){
@@ -1744,6 +1747,7 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function markSlide(){
   document.querySelectorAll("#tabs [data-go]").forEach(b => b.setAttribute("aria-current", Number(b.dataset.go) === cur));
   slides.forEach((sl, k) => sl.classList.toggle("active", k === cur));
+  $("app").classList.toggle("on-goal", cur === 0);
 }
 function go(i, smooth = true){
   cur = Math.max(0, Math.min(slides.length - 1, i));
