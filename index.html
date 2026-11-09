@@ -442,6 +442,7 @@ dialog[open]{animation:rise .25s steps(3,end)}
   .moodbody{font-size:14px;margin:4px 0 0}
   #sDial .two{gap:10px}
 }
+.icon.loginbtn{width:auto;padding:0 12px;font-size:14px;font-weight:700;white-space:nowrap;max-width:9em;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body>
@@ -452,6 +453,7 @@ dialog[open]{animation:rise .25s steps(3,end)}
       <div class="source" id="source"><i></i><span>연결 확인 중…</span></div>
     </div>
     <span class="clock" id="clock">--:--</span>
+    <button class="icon loginbtn" id="loginBtn" type="button" title="로그인하면 내 경로가 폰·컴퓨터에 같이 저장돼">로그인</button>
     <button class="icon" id="openRoutes" aria-label="내 경로">★</button>
     <button class="icon" id="openSettings" aria-label="설정">⚙</button>
   </header>
@@ -2360,6 +2362,12 @@ function renderRoutes(){
     b.querySelector("small").textContent = `${r.from} → ${r.to} · ${r.arrive} · 준비 ${r.prep}분`;
   });
 }
+// 로그인 버튼은 늘 보이게. 로그인 기능(auth.mjs)이 못 뜬 화면(파일로 열었거나 서버 없이 열림)에선 진짜 사이트로 보냄
+$("loginBtn").addEventListener("click", e => {
+  if(e.currentTarget.dataset.auth) return;
+  toast("여기선 로그인이 안 돼 (서버 없이 열린 화면). 로그인되는 jachul.vercel.app 열어줄게.");
+  setTimeout(() => window.open("https://jachul.vercel.app/", "_blank", "noopener"), 900);
+});
 $("openRoutes").addEventListener("click", () => { renderRoutes(); $("routeName").value = ""; $("routesDialog").showModal(); });
 $("routesClose").addEventListener("click", () => $("routesDialog").close());
 $("routesList").addEventListener("click", e => {
